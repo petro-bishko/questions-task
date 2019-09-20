@@ -12,4 +12,12 @@ export class QuestionFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  next() {
+    console.log('next'); // TODO remove console.log
+  }
+
+  submit() {
+    console.log('submit'); // TODO remove console.log
+  }
+
 }
