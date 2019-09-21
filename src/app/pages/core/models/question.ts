@@ -1,4 +1,4 @@
-import { FormControl } from './form-control';
+import { QuestionFormControl } from './question-form-control';
 
 export class Question {
   id: number;
@@ -6,5 +6,5 @@ export class Question {
   htmlLeftQuestionContent: string;
   htmlRightQuestionContent: string;
   formPosition: string;
-  formControl: FormControl[] = [];
+  questionFormControls: QuestionFormControl[] = [];
 }

@@ -1,13 +1,17 @@
 <header>
 	<a routerLink="">Go back</a>
-	<div class="title">Question № 1</div>
+	<div class="title" *ngIf="currentQuestion">{{currentQuestion.title}}</div>
 </header>
 <div class="content-wrapper">
 	<section>
-		<app-question-list></app-question-list>
+		<app-question-list [questionList]="questionList" [currentQuestion]="currentQuestion"></app-question-list>
 	</section>
 
 	<section>
-		<app-question-form></app-question-form>
+		<ng-container *ngIf="currentQuestion">
+			<app-progress-bar [questionList]="questionList" [currentQuestion]="currentQuestion"></app-progress-bar>
+
+			<app-question-form [currentQuestion]="currentQuestion"></app-question-form>
+		</ng-container>
 	</section>
 </div>

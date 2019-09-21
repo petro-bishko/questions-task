@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Question } from '../../../core/models/question';
+import { FormPositionType } from '../../../core/enum/form-postion-type';
 
 @Component({
   selector: 'app-question-form',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionFormComponent implements OnInit {
 
-  constructor() { }
+  @Input() currentQuestion: Question;
+  formPositionType = FormPositionType;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

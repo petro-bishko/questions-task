@@ -6,10 +6,10 @@ import { QuestionsComponent } from './questions.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { QuestionFormComponent } from './components/question-form/question-form.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
-import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DynamicFormService } from './components/dynamic-form/dynamic-form.service';
 import { QuestionsService } from './questions.service';
+import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
+import { DynamicFormQuestionService } from './components/dynamic-form-question/dynamic-form-question.service';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { QuestionsService } from './questions.service';
     QuestionListComponent,
     QuestionFormComponent,
     ProgressBarComponent,
-    DynamicFormComponent
+    DynamicFormQuestionComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +26,7 @@ import { QuestionsService } from './questions.service';
     ReactiveFormsModule
   ],
   providers: [
-    DynamicFormService,
+    DynamicFormQuestionService,
     QuestionsService
   ]
 })

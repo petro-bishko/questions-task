@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
-export class DynamicFormService {
+export class DynamicFormQuestionService {
 
   formValid: BehaviorSubject<boolean> = new BehaviorSubject(null);
   formValid$ = this.formValid.asObservable();

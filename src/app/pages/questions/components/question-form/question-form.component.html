@@ -1,6 +1,10 @@
-<app-progress-bar></app-progress-bar>
+<ng-container *ngIf="currentQuestion.htmlRightQuestionContent">
+	<div class="question-content" [innerHTML]="currentQuestion.htmlRightQuestionContent"></div>
+</ng-container>
 
-<app-dynamic-form></app-dynamic-form>
+<ng-container *ngIf="currentQuestion.formPosition === formPositionType.right">
+	<app-dynamic-form [questionFormControls]="currentQuestion.questionFormControls"></app-dynamic-form>
+</ng-container>
 
 <div class="action-block">
 	<button class="button">Submit</button>

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Question } from '../core/models/question';
 import { FormPositionType } from '../core/enum/form-postion-type';
 import { FormControlType } from '../core/enum/form-control-type';
-import { FormValidatorType } from '../core/enum/form-validator-type';
 import { Observable, of } from 'rxjs';
 
 @Injectable()
@@ -13,29 +12,37 @@ export class QuestionsService {
     {
       id: 1,
       title: 'Question 1',
-      htmlLeftQuestionContent: '<img src="./assets/img/main-page-bg.png">',
-      htmlRightQuestionContent: '<p>Question 1 how to do it?</p>',
+      htmlLeftQuestionContent: '<div><img src="./assets/img/questions/question-1.png"></div>',
+      htmlRightQuestionContent: '<p>What area for work would you choose?</p>',
       formPosition: FormPositionType.right,
-      formControl: [
+      questionFormControls: [
         {
-          type: FormControlType.radioButton,
-          validator: [FormValidatorType.required],
-          htmlContent: 'Answer 1',
+          controlType: FormControlType.radioButton,
+          required: true,
+          htmlContent: 'Region 1',
+          name: 'questionOne',
+          value: 1
         },
         {
-          type: FormControlType.radioButton,
-          validator: [FormValidatorType.required],
-          htmlContent: 'Answer 2',
+          controlType: FormControlType.radioButton,
+          required: true,
+          htmlContent: 'Region 1',
+          name: 'questionOne',
+          value: 2
         },
         {
-          type: FormControlType.radioButton,
-          validator: [FormValidatorType.required],
-          htmlContent: 'Answer 3',
+          controlType: FormControlType.radioButton,
+          required: true,
+          htmlContent: 'Region 3',
+          name: 'questionOne',
+          value: 3
         },
         {
-          type: FormControlType.radioButton,
-          validator: [FormValidatorType.required],
-          htmlContent: 'Answer 4',
+          controlType: FormControlType.radioButton,
+          required: true,
+          htmlContent: 'Region 4',
+          name: 'questionOne',
+          value: 4
         }
       ]
 
@@ -44,24 +51,33 @@ export class QuestionsService {
       id: 2,
       title: 'Question 2',
       htmlLeftQuestionContent: null,
-      htmlRightQuestionContent: '<p>Question 2 how to do it?</p>',
+      htmlRightQuestionContent: '<p>What would you to do first?</p>',
       formPosition: FormPositionType.left,
-      formControl: [
+      questionFormControls: [
         {
-          type: FormControlType.radioButton,
-          htmlContent: '<img src="./assets/img/main-page-bg.png">',
+          controlType: FormControlType.radioButton,
+          htmlContent: '<img src="./assets/img/questions/extra.png">',
+          required: true,
+          name: 'questionTwo',
+          value: 1
         },
         {
-          type: FormControlType.radioButton,
-          htmlContent: '<img src="./assets/img/main-page-bg.png">',
+          controlType: FormControlType.radioButton,
+          htmlContent: '<img src="./assets/img/questions/fridge.png">',
+          name: 'questionTwo',
+          value: 2
         },
         {
-          type: FormControlType.radioButton,
-          htmlContent: '<img src="./assets/img/main-page-bg.png">',
+          controlType: FormControlType.radioButton,
+          htmlContent: '<img src="./assets/img/questions/interior.png">',
+          name: 'questionTwo',
+          value: 3
         },
         {
-          type: FormControlType.radioButton,
-          htmlContent: '<img src="./assets/img/main-page-bg.png">',
+          controlType: FormControlType.radioButton,
+          htmlContent: '<img src="./assets/img/questions/party.png">',
+          name: 'questionTwo',
+          value: 4
         }
       ]
 
@@ -69,25 +85,30 @@ export class QuestionsService {
     {
       id: 3,
       title: 'Question 3',
-      htmlLeftQuestionContent: '<video src="some-url"></video>',
-      htmlRightQuestionContent: null,
-      formPosition: FormPositionType.left,
-      formControl: [
+      // tslint:disable-next-line:max-line-length
+      htmlLeftQuestionContent: `<div><video width="400" controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video></div>`,
+      htmlRightQuestionContent: '<p>What would you to do first?</p>',
+      formPosition: FormPositionType.right,
+      questionFormControls: [
         {
-          type: FormControlType.checkBox,
+          controlType: FormControlType.checkBox,
           htmlContent: 'Answer 1',
+          name: 'questionThree1',
         },
         {
-          type: FormControlType.checkBox,
+          controlType: FormControlType.checkBox,
           htmlContent: 'Answer 2',
+          name: 'questionThree2',
         },
         {
-          type: FormControlType.checkBox,
+          controlType: FormControlType.checkBox,
           htmlContent: 'Answer 3',
+          name: 'questionThree3',
         },
         {
-          type: FormControlType.checkBox,
+          controlType: FormControlType.checkBox,
           htmlContent: 'Answer 4',
+          name: 'questionThree4',
         }
       ]
 
