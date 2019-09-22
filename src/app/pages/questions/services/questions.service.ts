@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Question } from '../core/models/question';
-import { FormPositionType } from '../core/enum/form-postion-type';
-import { FormControlType } from '../core/enum/form-control-type';
+import { Question } from '../../core/models/question';
+import { FormPositionType } from '../../core/enum/form-postion-type';
+import { FormControlType } from '../../core/enum/form-control-type';
 import { Observable, of } from 'rxjs';
+import { Answer } from '../../core/models/answer';
 
 @Injectable()
 export class QuestionsService {
@@ -56,25 +57,28 @@ export class QuestionsService {
       questionFormControls: [
         {
           controlType: FormControlType.radioButton,
-          htmlContent: '<img src="./assets/img/questions/extra.png">',
           required: true,
+          htmlContent: '<img src="./assets/img/questions/extra.png">',
           name: 'questionTwo',
           value: 1
         },
         {
           controlType: FormControlType.radioButton,
+          required: true,
           htmlContent: '<img src="./assets/img/questions/fridge.png">',
           name: 'questionTwo',
           value: 2
         },
         {
           controlType: FormControlType.radioButton,
+          required: true,
           htmlContent: '<img src="./assets/img/questions/interior.png">',
           name: 'questionTwo',
           value: 3
         },
         {
           controlType: FormControlType.radioButton,
+          required: true,
           htmlContent: '<img src="./assets/img/questions/party.png">',
           name: 'questionTwo',
           value: 4
@@ -115,6 +119,21 @@ export class QuestionsService {
     }
   ];
 
+  private answers: Answer[] = [
+    {
+      questionId: 1,
+      correctAnswer: {questionOne: 4}
+    },
+    {
+      questionId: 2,
+      correctAnswer: {questionTwo: 2}
+    },
+    {
+      questionId: 3,
+      correctAnswer: {questionThree4: true, questionThree2: true}
+    }
+  ];
+
   constructor() {
   }
 
@@ -125,4 +144,16 @@ export class QuestionsService {
   getQuestionByID(id: number): Observable<Question> {
     return of(this.questions.find((value) => value.id === id));
   }
+
+  getAnswer(questionID, userAnswer) {
+    const answer = this.answers.find((value) => value.questionId === questionID);
+    answer.userAnswer = userAnswer;
+    answer.complete = this.isAnswerComplete(answer);
+    return of(answer);
+  }
+
+  private isAnswerComplete(answer: Answer) {
+    return JSON.stringify(answer.correctAnswer) === JSON.stringify(answer.userAnswer);
+  }
+
 }

@@ -1,35 +1,33 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Question } from '../../../core/models/question';
+import { AnswersService } from '../../services/answers.service';
+import { Answer } from '../../../core/models/answer';
 
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss']
 })
-export class ProgressBarComponent implements OnInit, OnChanges {
+export class ProgressBarComponent {
 
   @Input() questionList: Question[];
 
-  @Input() currentQuestion: Question;
+  @Input() question: Question;
 
   currentNumberOfQuestion: number;
 
-  constructor() {
+  get currentNumber() {
+    return this.questionList.findIndex((value) => value.id === this.question.id);
   }
 
-  ngOnInit() {
-    this.getCurrentNumber();
+
+  constructor(private answersService: AnswersService) {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (!changes.currentQuestion.firstChange && changes.currentQuestion.currentValue) {
-      this.getCurrentNumber();
-    }
+  answer(item: Question): Answer {
+    return this.answersService.getAnswers().find((value) => value.questionId === item.id) || {} as Answer;
   }
 
-  getCurrentNumber() {
-    this.currentNumberOfQuestion = this.questionList.findIndex((value) => value.id === this.currentQuestion.id);
-  }
 
   trackByFn(i) {
     return i;

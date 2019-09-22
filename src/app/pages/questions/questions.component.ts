@@ -1,26 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { QuestionsService } from './questions.service';
+import { QuestionsService } from './services/questions.service';
 import { Subscription } from 'rxjs';
 import { Question } from '../core/models/question';
+import { QuestionFormComponent } from './components/question-form/question-form.component';
 
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss']
 })
-export class QuestionsComponent implements OnInit, OnDestroy {
+export class QuestionsComponent implements OnDestroy {
 
+  @ViewChild('questionForm', {static: true}) public questionForm: QuestionFormComponent;
   currentQuestion: Question;
   questionList: Question[] = [];
   private subscription: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute,
               private questionsService: QuestionsService) {
-  }
-
-  ngOnInit() {
     this.getCurrentQuestion();
     this.getQuestionsList();
   }

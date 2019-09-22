@@ -1,4 +1,6 @@
 <div class="progress-bar">
-	<div class="step" *ngFor="let item of questionList; index as i; trackBy: trackByFn">{{i + 1}}</div>
+	<div class="step" *ngFor="let item of questionList; index as i; trackBy: trackByFn"
+	     [class.correct-answer]="answer(item).complete === true"
+	     [class.incorrect-answer]="answer(item).complete === false">{{i + 1}}</div>
 </div>
-<div class="current-step">{{currentNumberOfQuestion + 1}} / {{questionList.length}} {{currentQuestion.title}}</div>
+<div class="current-step">{{currentNumber + 1}} / {{questionList.length}} {{question.title}}</div>

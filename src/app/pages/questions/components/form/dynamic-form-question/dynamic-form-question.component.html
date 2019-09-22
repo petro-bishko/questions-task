@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+	<div class="form-item" *ngFor="let control of question.questionFormControls">
+		<div class="form-item">
+			<label [ngSwitch]="control.controlType">
+				<ng-container *ngSwitchCase="formControlType.radioButton">
+					<input type="radio"
+					       [name]="control.name"
+					       [value]="control.value"
+					       [formControlName]="control.name">
+				</ng-container>
+
+				<ng-container *ngSwitchCase="formControlType.checkBox">
+					<input [formControlName]="control.name"
+					       type="checkbox">
+				</ng-container>
+
+				<span [innerHTML]="control.htmlContent"></span>
+			</label>
+		</div>
+	</div>
+</form>

@@ -1,12 +1,12 @@
-<ng-container *ngIf="currentQuestion.htmlRightQuestionContent">
-	<div class="question-content" [innerHTML]="currentQuestion.htmlRightQuestionContent"></div>
+<ng-container *ngIf="question.htmlRightQuestionContent">
+	<div class="question-content" [innerHTML]="question.htmlRightQuestionContent"></div>
 </ng-container>
 
-<ng-container *ngIf="currentQuestion.formPosition === formPositionType.right">
-	<app-dynamic-form [questionFormControls]="currentQuestion.questionFormControls"></app-dynamic-form>
+<ng-container *ngIf="question.formPosition === formPositionType.right">
+	<app-dynamic-form [question]="question"></app-dynamic-form>
 </ng-container>
 
 <div class="action-block">
-	<button class="button">Submit</button>
-	<button class="button">Next</button>
+	<button class="button" [disabled]="isFormInvalid" (click)="submit()">Submit</button>
+	<button class="button" (click)="next()">Next</button>
 </div>

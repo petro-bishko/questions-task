@@ -1,21 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Question } from '../../../core/models/question';
 import { FormPositionType } from '../../../core/enum/form-postion-type';
+import { QuestionsService } from '../../services/questions.service';
+import { DynamicFormQuestionService } from '../form/dynamic-form-question/dynamic-form-question.service';
+import { first } from 'rxjs/operators';
+import { AnswersService } from '../../services/answers.service';
 
 @Component({
   selector: 'app-question-form',
   templateUrl: './question-form.component.html',
   styleUrls: ['./question-form.component.scss']
 })
-export class QuestionFormComponent implements OnInit {
+export class QuestionFormComponent {
 
-  @Input() currentQuestion: Question;
+  @Input() question: Question;
   formPositionType = FormPositionType;
 
-  constructor() {
+  constructor(private questionsService: QuestionsService,
+              private formService: DynamicFormQuestionService,
+              private answersService: AnswersService) {
   }
 
-  ngOnInit() {
+  get isFormInvalid() {
+    return !this.formService.isFormValid();
   }
 
   next() {
@@ -23,7 +30,9 @@ export class QuestionFormComponent implements OnInit {
   }
 
   submit() {
-    console.log('submit'); // TODO remove console.log
+    this.questionsService.getAnswer(this.question.id, this.formService.getFormValue()).pipe(
+      first()
+    ).subscribe((data) => this.answersService.addAnswer(data));
   }
 
 }

@@ -7,10 +7,10 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import { QuestionFormComponent } from './components/question-form/question-form.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { QuestionsService } from './questions.service';
-import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
-import { DynamicFormQuestionService } from './components/dynamic-form-question/dynamic-form-question.service';
-
+import { QuestionsService } from './services/questions.service';
+import { DynamicFormQuestionComponent } from './components/form/dynamic-form-question/dynamic-form-question.component';
+import { DynamicFormQuestionService } from './components/form/dynamic-form-question/dynamic-form-question.service';
+import { AnswersService } from './services/answers.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { DynamicFormQuestionService } from './components/dynamic-form-question/d
     QuestionListComponent,
     QuestionFormComponent,
     ProgressBarComponent,
-    DynamicFormQuestionComponent
+    DynamicFormQuestionComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +27,8 @@ import { DynamicFormQuestionService } from './components/dynamic-form-question/d
   ],
   providers: [
     DynamicFormQuestionService,
-    QuestionsService
+    QuestionsService,
+    AnswersService
   ]
 })
 export class QuestionsModule {

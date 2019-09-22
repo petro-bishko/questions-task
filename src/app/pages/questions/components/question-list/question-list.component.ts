@@ -10,7 +10,7 @@ import { FormPositionType } from '../../../core/enum/form-postion-type';
 export class QuestionListComponent implements OnInit {
 
   @Input() questionList: Question[];
-  @Input() currentQuestion: Question;
+  @Input() question: Question;
 
   formPositionType = FormPositionType;
 

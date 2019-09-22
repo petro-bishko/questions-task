@@ -1,15 +1,15 @@
 <div class="question-list">
-	<div class="item" *ngFor="let item of questionList; index as i;trackBy: trackByFn" [routerLink]="['/','questions', item.id]">
+	<div class="item" *ngFor="let item of questionList; trackBy: trackByFn" [routerLink]="['/','questions', item.id]">
 		<div class="title">{{item.title}}</div>
 
-		<div class="content" *ngIf="currentQuestion && (item.id === currentQuestion.id)">
+		<div class="content" *ngIf="question && (item.id === question.id)">
 
 			<ng-container *ngIf="item.htmlLeftQuestionContent">
 				<div class="question-content" [innerHTML]="item.htmlLeftQuestionContent"></div>
 			</ng-container>
 
 			<ng-container *ngIf="item.formPosition === formPositionType.left">
-				<app-dynamic-form [questionFormControls]="item.questionFormControls"></app-dynamic-form>
+				<app-dynamic-form [question]="item"></app-dynamic-form>
 			</ng-container>
 		</div>
 	</div>
