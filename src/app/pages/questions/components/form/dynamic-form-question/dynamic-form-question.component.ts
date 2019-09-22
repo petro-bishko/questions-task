@@ -24,7 +24,7 @@ export class DynamicFormQuestionComponent implements OnDestroy {
     return this._question;
   }
 
-  get answer() {
+  get answer(): Answer {
     if (!this.question) {
       return;
     }
@@ -47,6 +47,13 @@ export class DynamicFormQuestionComponent implements OnDestroy {
       debounceTime(500)
     ).subscribe((data) => {
       this.formService.setFormValid(this.form.valid);
+
+      for (const i in data) {
+        if (data.hasOwnProperty(i) && !data[i]) {
+          delete data[i];
+        }
+      }
+
       this.formService.setFormValue(data);
     });
 
@@ -63,7 +70,6 @@ export class DynamicFormQuestionComponent implements OnDestroy {
 
     this.formValueChanges();
   }
-
 
 
   ngOnDestroy() {

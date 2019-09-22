@@ -2,19 +2,30 @@
 	<div class="form-item" *ngFor="let control of question.questionFormControls">
 		<div class="form-item">
 			<label [ngSwitch]="control.controlType">
+
+
 				<ng-container *ngSwitchCase="formControlType.radioButton">
 					<input type="radio"
 					       [name]="control.name"
 					       [value]="control.value"
 					       [formControlName]="control.name">
+					<span [innerHTML]="control.htmlContent"></span>
+					<!--CHECK ANSWERS-->
+					<span class="answer" *ngIf="answer.complete === true && answer.userAnswer[control.name] === control.value"><- Correct</span>
+					<span class="answer" *ngIf="answer.complete === false && answer.userAnswer[control.name] === control.value"><- Incorrect</span>
+					<span class="answer" *ngIf="answer.complete === false && answer.correctAnswer[control.name] === control.value"><- Correct</span>
 				</ng-container>
 
 				<ng-container *ngSwitchCase="formControlType.checkBox">
-					<input [formControlName]="control.name"
-					       type="checkbox">
+					<input [formControlName]="control.name" type="checkbox">
+
+					<span [innerHTML]="control.htmlContent"></span>
+					<!--CHECK ANSWERS-->
+					<span class="answer" *ngIf="answer.complete === true && answer.userAnswer[control.name]"><- Correct</span>
+					<!--<span class="answer" *ngIf="answer.complete === false && answer.userAnswer[control.name] && answer.correctAnswer[control.name]"><- Incorrect</span>-->
+					<span class="answer" *ngIf="answer.complete === false && answer.correctAnswer[control.name]"><- Correct</span>
 				</ng-container>
 
-				<span [innerHTML]="control.htmlContent"></span>
 			</label>
 		</div>
 	</div>

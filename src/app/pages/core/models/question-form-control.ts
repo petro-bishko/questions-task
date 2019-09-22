@@ -1,4 +1,5 @@
 export class QuestionFormControl {
+  id: number;
   controlType: string;
   htmlContent: string;
   name: string;

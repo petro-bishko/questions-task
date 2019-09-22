@@ -38,7 +38,7 @@ export class DynamicFormQuestionService {
         validators.push(Validators.pattern('true'));
       }
 
-      group[control.name] = control.required ? new FormControl('', validators) : new FormControl('');
+      group[control.name] = control.required ? new FormControl(null, validators) : new FormControl(null);
     });
 
     return new FormGroup(group);

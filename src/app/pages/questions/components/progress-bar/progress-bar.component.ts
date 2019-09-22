@@ -14,8 +14,6 @@ export class ProgressBarComponent {
 
   @Input() question: Question;
 
-  currentNumberOfQuestion: number;
-
   get currentNumber() {
     return this.questionList.findIndex((value) => value.id === this.question.id);
   }

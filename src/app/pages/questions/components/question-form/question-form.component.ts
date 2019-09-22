@@ -5,6 +5,7 @@ import { QuestionsService } from '../../services/questions.service';
 import { DynamicFormQuestionService } from '../form/dynamic-form-question/dynamic-form-question.service';
 import { first } from 'rxjs/operators';
 import { AnswersService } from '../../services/answers.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-question-form',
@@ -18,7 +19,9 @@ export class QuestionFormComponent {
 
   constructor(private questionsService: QuestionsService,
               private formService: DynamicFormQuestionService,
-              private answersService: AnswersService) {
+              private answersService: AnswersService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   get isFormInvalid() {
@@ -26,10 +29,16 @@ export class QuestionFormComponent {
   }
 
   next() {
-    console.log('next'); // TODO remove console.log
+    const questionId = this.route.snapshot.paramMap.get('id');
+    const question = this.questionsService.getNextQuestion(+questionId);
+    console.log(question); // TODO remove console.log
+    if (question) {
+      this.router.navigate(['/', 'questions', question.id]);
+    }
   }
 
   submit() {
+    console.log(this.formService.getFormValue()); // TODO remove console.log
     this.questionsService.getAnswer(this.question.id, this.formService.getFormValue()).pipe(
       first()
     ).subscribe((data) => this.answersService.addAnswer(data));

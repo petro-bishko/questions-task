@@ -3,9 +3,18 @@
 
   .form-item {
     margin: 10px 0;
+    display: flex;
+
+    .answer {
+      display: inline-flex;
+    }
 
     label {
       cursor: pointer;
+
+      &.correct-answer {
+        border: 1px solid greenyellow;
+      }
 
       input {
         margin-right: 10px;

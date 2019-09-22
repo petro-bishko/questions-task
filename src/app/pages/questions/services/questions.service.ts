@@ -4,10 +4,10 @@ import { FormPositionType } from '../../core/enum/form-postion-type';
 import { FormControlType } from '../../core/enum/form-control-type';
 import { Observable, of } from 'rxjs';
 import { Answer } from '../../core/models/answer';
+import { AnswersService } from './answers.service';
 
 @Injectable()
 export class QuestionsService {
-
 
   private questions: Question[] = [
     {
@@ -18,6 +18,7 @@ export class QuestionsService {
       formPosition: FormPositionType.right,
       questionFormControls: [
         {
+          id: 1,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: 'Region 1',
@@ -25,6 +26,7 @@ export class QuestionsService {
           value: 1
         },
         {
+          id: 2,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: 'Region 1',
@@ -32,6 +34,7 @@ export class QuestionsService {
           value: 2
         },
         {
+          id: 3,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: 'Region 3',
@@ -39,6 +42,7 @@ export class QuestionsService {
           value: 3
         },
         {
+          id: 4,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: 'Region 4',
@@ -56,6 +60,7 @@ export class QuestionsService {
       formPosition: FormPositionType.left,
       questionFormControls: [
         {
+          id: 1,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: '<img src="./assets/img/questions/extra.png">',
@@ -63,6 +68,7 @@ export class QuestionsService {
           value: 1
         },
         {
+          id: 2,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: '<img src="./assets/img/questions/fridge.png">',
@@ -70,6 +76,7 @@ export class QuestionsService {
           value: 2
         },
         {
+          id: 3,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: '<img src="./assets/img/questions/interior.png">',
@@ -77,6 +84,7 @@ export class QuestionsService {
           value: 3
         },
         {
+          id: 4,
           controlType: FormControlType.radioButton,
           required: true,
           htmlContent: '<img src="./assets/img/questions/party.png">',
@@ -95,21 +103,25 @@ export class QuestionsService {
       formPosition: FormPositionType.right,
       questionFormControls: [
         {
+          id: 1,
           controlType: FormControlType.checkBox,
           htmlContent: 'Answer 1',
           name: 'questionThree1',
         },
         {
+          id: 2,
           controlType: FormControlType.checkBox,
           htmlContent: 'Answer 2',
           name: 'questionThree2',
         },
         {
+          id: 3,
           controlType: FormControlType.checkBox,
           htmlContent: 'Answer 3',
           name: 'questionThree3',
         },
         {
+          id: 4,
           controlType: FormControlType.checkBox,
           htmlContent: 'Answer 4',
           name: 'questionThree4',
@@ -130,11 +142,11 @@ export class QuestionsService {
     },
     {
       questionId: 3,
-      correctAnswer: {questionThree4: true, questionThree2: true}
+      correctAnswer: {questionThree2: true, questionThree4: true}
     }
   ];
 
-  constructor() {
+  constructor(private answersService: AnswersService) {
   }
 
   getQuestions(): Observable<Question[]> {
@@ -151,6 +163,17 @@ export class QuestionsService {
     answer.complete = this.isAnswerComplete(answer);
     return of(answer);
   }
+
+  getNextQuestion(questionId: number) {
+    const questionIndex = this.questions.findIndex((value) => value.id === questionId);
+    if ((this.questions.length - 1) === questionIndex) {
+      return;
+    }
+
+
+    return this.questions[questionIndex + 1];
+  }
+
 
   private isAnswerComplete(answer: Answer) {
     return JSON.stringify(answer.correctAnswer) === JSON.stringify(answer.userAnswer);
