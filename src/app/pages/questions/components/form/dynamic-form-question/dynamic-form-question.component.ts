@@ -48,6 +48,7 @@ export class DynamicFormQuestionComponent implements OnDestroy {
     ).subscribe((data) => {
       this.formService.setFormValid(this.form.valid);
 
+      // clear empty data
       for (const i in data) {
         if (data.hasOwnProperty(i) && !data[i]) {
           delete data[i];

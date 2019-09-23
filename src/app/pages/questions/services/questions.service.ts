@@ -4,7 +4,6 @@ import { FormPositionType } from '../../core/enum/form-postion-type';
 import { FormControlType } from '../../core/enum/form-control-type';
 import { Observable, of } from 'rxjs';
 import { Answer } from '../../core/models/answer';
-import { AnswersService } from './answers.service';
 
 @Injectable()
 export class QuestionsService {
@@ -13,7 +12,7 @@ export class QuestionsService {
     {
       id: 1,
       title: 'Question 1',
-      htmlLeftQuestionContent: '<div><img src="./assets/img/questions/question-1.png"></div>',
+      htmlLeftQuestionContent: '<div><img src="./assets/img/questions/question-1.png" width="50%"></div>',
       htmlRightQuestionContent: '<p>What area for work would you choose?</p>',
       formPosition: FormPositionType.right,
       questionFormControls: [
@@ -63,7 +62,7 @@ export class QuestionsService {
           id: 1,
           controlType: FormControlType.radioButton,
           required: true,
-          htmlContent: '<img src="./assets/img/questions/extra.png">',
+          htmlContent: '<img src="./assets/img/questions/extra.png" width="40%">',
           name: 'questionTwo',
           value: 1
         },
@@ -71,7 +70,7 @@ export class QuestionsService {
           id: 2,
           controlType: FormControlType.radioButton,
           required: true,
-          htmlContent: '<img src="./assets/img/questions/fridge.png">',
+          htmlContent: '<img src="./assets/img/questions/fridge.png" width="40%">',
           name: 'questionTwo',
           value: 2
         },
@@ -79,7 +78,7 @@ export class QuestionsService {
           id: 3,
           controlType: FormControlType.radioButton,
           required: true,
-          htmlContent: '<img src="./assets/img/questions/interior.png">',
+          htmlContent: '<img src="./assets/img/questions/interior.png" width="40%">',
           name: 'questionTwo',
           value: 3
         },
@@ -87,7 +86,7 @@ export class QuestionsService {
           id: 4,
           controlType: FormControlType.radioButton,
           required: true,
-          htmlContent: '<img src="./assets/img/questions/party.png">',
+          htmlContent: '<img src="./assets/img/questions/party.png" width="40%">',
           name: 'questionTwo',
           value: 4
         }
@@ -146,9 +145,6 @@ export class QuestionsService {
     }
   ];
 
-  constructor(private answersService: AnswersService) {
-  }
-
   getQuestions(): Observable<Question[]> {
     return of(this.questions);
   }
@@ -161,13 +157,21 @@ export class QuestionsService {
     const answer = this.answers.find((value) => value.questionId === questionID);
     answer.userAnswer = userAnswer;
     answer.complete = this.isAnswerComplete(answer);
+
+    this.questions.map((value) => {
+      if (value.id === questionID) {
+        value.answered = true;
+      }
+
+      return value;
+    });
     return of(answer);
   }
 
   getNextQuestion(questionId: number) {
     const questionIndex = this.questions.findIndex((value) => value.id === questionId);
     if ((this.questions.length - 1) === questionIndex) {
-      return;
+      return this.questions.filter((value) => !value.answered)[0];
     }
 
 

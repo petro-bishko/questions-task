@@ -11,10 +11,9 @@
 
     label {
       cursor: pointer;
-
-      &.correct-answer {
-        border: 1px solid greenyellow;
-      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       input {
         margin-right: 10px;

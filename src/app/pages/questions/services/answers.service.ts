@@ -6,9 +6,6 @@ export class AnswersService {
 
   private answers: Answer[] = [];
 
-  constructor() {
-  }
-
   addAnswer(answer: Answer) {
     if (this.answers.find((value) => value.questionId === answer.questionId)) {
       return;

@@ -7,4 +7,5 @@ export class Question {
   htmlRightQuestionContent: string;
   formPosition: string;
   questionFormControls: QuestionFormControl[] = [];
+  answered?: boolean;
 }

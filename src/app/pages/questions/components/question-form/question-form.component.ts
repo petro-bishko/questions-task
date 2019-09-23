@@ -31,14 +31,12 @@ export class QuestionFormComponent {
   next() {
     const questionId = this.route.snapshot.paramMap.get('id');
     const question = this.questionsService.getNextQuestion(+questionId);
-    console.log(question); // TODO remove console.log
     if (question) {
       this.router.navigate(['/', 'questions', question.id]);
     }
   }
 
   submit() {
-    console.log(this.formService.getFormValue()); // TODO remove console.log
     this.questionsService.getAnswer(this.question.id, this.formService.getFormValue()).pipe(
       first()
     ).subscribe((data) => this.answersService.addAnswer(data));

@@ -9,9 +9,6 @@ export class DynamicFormQuestionService {
   formValid: boolean;
   formValue: any;
 
-  constructor() {
-  }
-
   setFormValid(formValid: boolean) {
     this.formValid = formValid;
   }

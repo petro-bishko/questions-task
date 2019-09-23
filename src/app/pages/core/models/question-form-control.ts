@@ -5,5 +5,4 @@ export class QuestionFormControl {
   name: string;
   required?: boolean;
   value?: any;
-  placeholder?: string;
 }
